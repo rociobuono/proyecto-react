@@ -4,6 +4,8 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 //Layouts
 import Frontend from './Layouts/Frontend';
 import Backoffice from './Layouts/Backoffice';
+import Buttons from "./Components/ButtonsLink";
+import Menu from "./Components/Menu";
 
 // ----- CONSIGNA ----- //
 /**
@@ -80,6 +82,7 @@ const RouterApp = (props) => {
       <BrowserRouter>
           <Routes>
             {protectedRoutes}
+            {baseFrontRoutes("/home",)}        
           </Routes>
       </BrowserRouter>
     </>
