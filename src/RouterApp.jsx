@@ -5,7 +5,8 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Frontend from './Layouts/Frontend';
 import Backoffice from './Layouts/Backoffice';
 import Buttons from "./Components/ButtonsLink";
-import Menu from "./Components/Menu";
+import Inicio from "./Pages/Inicio";
+
 
 // ----- CONSIGNA ----- //
 /**
@@ -82,7 +83,10 @@ const RouterApp = (props) => {
       <BrowserRouter>
           <Routes>
             {protectedRoutes}
-            {baseFrontRoutes("/home",)}        
+            {baseFrontRoutes("*", <></>)}   
+            {baseFrontRoutes("/inicio", <Inicio/>)}   
+            {baseFrontRoutes("/noticias", <></>)}      
+
           </Routes>
       </BrowserRouter>
     </>
