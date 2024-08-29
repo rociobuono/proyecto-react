@@ -1,71 +1,90 @@
-import { useState } from "react";
+
 import Buttons from "../Components/Buttons";
 import ButtonsLink from "../Components/ButtonsLink";
-import TextInput from "../Components/TextInput";
+import React, { useState, useEffect } from "react";
 
 
-const MENU_DATA = [
-    {
-        to: '/inicio',
-        text: 'Inicio'
-    },
-    {
-        to: '/noticias',
-        text: 'Noticias'
-    }
-]
+let MENU_DATA = [
+    
+];
+
+ if(localStorage.getItem("usrData")){
+     MENU_DATA = [
+        {
+            to: '/inicio',
+            text: 'Inicio'
+        },
+        {
+            to: '/nosotros',
+            text: 'Nosotros'
+        }
+     ]
+ }
+
 
 const Frontend = (props) => {
-    const [inputData, setInputData] = useState({ username: '', password: '' })
-    const login = () => {
-
+    const [usrData, setUsrData] = useState(false);
+    
+    const logOut = () => {
+        localStorage.clear();
+        window.location.replace("/");
     }
-    return (
+
+    useEffect(() => {
+        let tmp = localStorage.getItem("usrData");
+
+        if(tmp)
+        {
+            setUsrData(JSON.parse(tmp));
+        }
+    }, []);
+
+    return(
         <>
-            <header className="w-[100vw] h-[3rem] bg-pink-100 flex items-center justify-around fixed top-0 left-0 z-50">
+            <header id="header"className="w-[100vw] h-[3rem] bg-custom-gray flex items-center justify-around fixed top-0 left-0 z-50">
                 <div className="flex">
-                    {
-                        MENU_DATA.map((item, index) => {
-                            return (
-                                <>
-                                    <ButtonsLink
-                                        txt={item.text}
-                                        url={item.to}
-                                        key={index}
-                                    />
-                                    {props.children}
-                                </>
-                            );
-                        })
+                {
+                        // Mapea y renderiza los botones solo si MENU_DATA tiene elementos
+                        MENU_DATA.length > 0 ? (
+                            MENU_DATA.map((item, index) => (
+                                <ButtonsLink
+                                    txt={item.text}
+                                    url={item.to}
+                                    key={index}
+                                />
+                            ))
+                        ) : (
+                            // Muestra un mensaje si MENU_DATA está vacío
+                            <span className="text-white">Welcome! Please log in to access more features.</span>
+                        )
                     }
                 </div>
-                <div className="flex items-center space-x-2">
-                    <div>
-                        <TextInput
-                            type={'text'}
-                            placeholder={'Username'}
-                            callback={(e) => { setInputData({ ...inputData, username: e.target.value }) }}
-                        />
-                        <TextInput
-                            type={'password'}
-                            placeholder={'Password'}
-                            callback={(e) => { setInputData({ ...inputData, password: e.target.value }) }}
+                {
+                usrData && (
+                    <div>   
+                        <span className="text-white">
+                            Usr: {usrData.name}
+                        </span>
+                        &nbsp;
+                        &nbsp;
+                        <span className="text-white">
+                            LogIn at: {usrData.time}
+                        </span>
+                        &nbsp;
+                        &nbsp;
+                        <Buttons 
+                            txt={'LogOut'}
+                            callback={() => {logOut()}}
                         />
                     </div>
-                    <div>
-                        <Buttons
-                            callback={() => { login() }}
-                            txt={'Iniciar'}
-                        />
-                    </div>
-                </div>
-
+                    )
+                }
             </header>
-            <main className="pt-[3rem]">
-                {props.children}
-            </main>
+            {props.children}
         </>
     );
+
+
 
 
 }

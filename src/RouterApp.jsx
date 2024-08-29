@@ -4,10 +4,10 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 //Layouts
 import Frontend from './Layouts/Frontend';
 import Backoffice from './Layouts/Backoffice';
-import Buttons from "./Components/ButtonsLink";
+//Pages
 import Inicio from "./Pages/Inicio";
-
-
+import Login from "./Pages/Login";
+import Nosotros from "./Pages/Nosotros";
 // ----- CONSIGNA ----- //
 /**
   En este repositorio, encontraran una instalacion minima Vite y React Router Dom.
@@ -66,14 +66,18 @@ const RouterApp = (props) => {
   }
 
   useEffect(() => {
-    if (true) {
+    if (localStorage.getItem("usrData")) {
       setProtectedRoutes(
         <>
-          
+          {baseFrontRoutes("/inicio", <Inicio/>)}  
+          {baseFrontRoutes("/nosotros", <Nosotros/>)}  
+          {baseFrontRoutes("*", <>404</>)}   
         </>
       );
     } else {
-      setProtectedRoutes(<></>);
+      setProtectedRoutes(<>
+       {baseFrontRoutes("*", <Login/>)}  
+      </>);
     }
   }, [user])
 
@@ -82,10 +86,7 @@ const RouterApp = (props) => {
     <>
       <BrowserRouter>
           <Routes>
-            {protectedRoutes}
-            {baseFrontRoutes("*", <></>)}   
-            {baseFrontRoutes("/inicio", <Inicio/>)}   
-            {baseFrontRoutes("/noticias", <></>)}      
+            {protectedRoutes}    
 
           </Routes>
       </BrowserRouter>
