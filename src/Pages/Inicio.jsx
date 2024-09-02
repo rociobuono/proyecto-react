@@ -13,11 +13,11 @@ const Inicio = () => {
                         Discover our features and services that can help you achieve your goals. Explore our website to learn more.
                     </p>
                     <div className="mt-8 flex justify-center gap-x-6">
-                        <a href="#services" className="text-lg font-semibold text-indigo-600 hover:text-indigo-700">
+                        <a href="#services" className="text-lg font-semibold text-stone-500 hover:text-indigo-700">
                             Learn More
                             <span aria-hidden="true"> &rarr;</span>
                         </a>
-                        <a href="#contact" className="text-lg font-semibold text-indigo-600 hover:text-indigo-700">
+                        <a href="#contact" className="text-lg font-semibold text-stone-500 hover:text-indigo-700">
                             Contact Us
                             <span aria-hidden="true"> &rarr;</span>
                         </a>
