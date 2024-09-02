@@ -34,10 +34,10 @@ const Login = () => {
             </div>
 
             <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-                <form action="#" method="POST" className="space-y-6">
+                <form action="/inicio" method="POST" className="space-y-6">
                     <div>
                         <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900">
-                            Email address
+                            User 
                         </label>
                         <div className="mt-2">
                             <TextInput
@@ -54,7 +54,7 @@ const Login = () => {
                                 Password
                             </label>
                             <div className="text-sm">
-                                <a href="#" className="font-semibold text-stone-500 hover:text-indigo-500">
+                                <a  className="font-semibold text-stone-500 hover:text-indigo-500">
                                     Forgot password?
                                 </a>
                             </div>
