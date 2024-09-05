@@ -2,15 +2,18 @@ import React from 'react';
 import { useState } from "react";
 import TextInput from "../Components/TextInput";
 import Buttons from "../Components/Buttons";
-const Login = () => {
-    const [formData, setFormData] = useState({});
+import { POST } from "../Services/Fetch.js";
+
+const url = "login"
+const Login =  () => {
+    const [formData, setFormData] = useState({ Username: '', Password: '' });
 
     const login = async () => {
-
-        if (!formData?.name) {
+        event.preventDefault();
+        if (!formData.Username ) {
             window.alert("Complete los campos para continuar.");
         }
-        else {
+        /*else {
             //Aca se llamaria al endpoint de autenticacion
             let rsp = {
                 name: formData.name,
@@ -20,6 +23,19 @@ const Login = () => {
             localStorage.setItem("usrData", JSON.stringify(rsp));
 
             window.location.replace("/inicio");
+        }*/
+        try {
+            const response = await POST(url, formData); // Llama a la función POST con los datos del formulario
+            response.token = localStorage.getItem('token'); 
+            if (response && response.token) {
+                localStorage.setItem("usrData", JSON.stringify(response));
+                window.location.replace("/inicio");
+            } else {
+                window.alert("Error de autenticación. Verifica tus credenciales.");
+            }
+        } catch (error) {
+            console.error("Error al iniciar sesión:", error);
+            window.alert("Ocurrió un error. Inténtalo de nuevo.");
         }
 
     }
@@ -34,16 +50,17 @@ const Login = () => {
             </div>
 
             <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-                <form action="/inicio" method="POST" className="space-y-6">
+                <form onSubmit={login}  className="space-y-6">
                     <div>
-                        <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900">
-                            User 
+                        <label htmlFor="username" className="block text-sm font-medium leading-6 text-gray-900">
+                            Username 
                         </label>
                         <div className="mt-2">
                             <TextInput
                                 type={'text'}
-                                placeholder={'Username'}
-                                callback={(e) => { setFormData({ ...formData, name: e.target.value }) }}
+                                //placeholder={'Username'}
+                                callback={(e) => { setFormData({ ...formData, Username: e.target.value }) }}
+                                id={'username'}
                             />
                         </div>
                     </div>
@@ -62,8 +79,9 @@ const Login = () => {
                         <div className="mt-2">
                             <TextInput
                                 type={'password'}
-                                placeholder={'Password'}
-                                callback={(e) => { setFormData({ ...formData, password: e.target.value }) }}
+                                //placeholder={'Password'}
+                                callback={(e) => { setFormData({ ...formData, Password: e.target.value }) }}
+                                id={'password'}
                             />
                         </div>
                     </div>
@@ -81,7 +99,7 @@ const Login = () => {
                 <p className="mt-10 text-center text-sm text-gray-500">
                     Not a member?{' '}
                     <a href="#" className="font-semibold leading-6 text-stone-500 hover:text-indigo-500">
-                        Start a 14 day free trial
+                        Sign Up!
                     </a>
                 </p>
             </div>
