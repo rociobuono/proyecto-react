@@ -4,6 +4,7 @@ import TextInput from "../Components/TextInput";
 import Buttons from "../Components/Buttons";
 import { POST } from "../Services/Fetch.js";
 
+
 const url = "login"
 const Login =  () => {
     const [formData, setFormData] = useState({ Username: '', Password: '' });
@@ -13,26 +14,14 @@ const Login =  () => {
         if (!formData.Username ) {
             window.alert("Complete los campos para continuar.");
         }
-        /*else {
-            //Aca se llamaria al endpoint de autenticacion
-            let rsp = {
-                name: formData.name,
-                time: new Date(Date.now()).toDateString()
-            }
-
-            localStorage.setItem("usrData", JSON.stringify(rsp));
-
-            window.location.replace("/inicio");
-        }*/
         try {
             const response = await POST(url, formData); // Llama a la función POST con los datos del formulario
-            response.token = localStorage.getItem('token'); 
-            if (response && response.token) {
-                localStorage.setItem("usrData", JSON.stringify(response));
+            
+            localStorage.setItem('token', response?.accessToken); 
+            if(localStorage.getItem('token')){
                 window.location.replace("/inicio");
-            } else {
-                window.alert("Error de autenticación. Verifica tus credenciales.");
             }
+
         } catch (error) {
             console.error("Error al iniciar sesión:", error);
             window.alert("Ocurrió un error. Inténtalo de nuevo.");

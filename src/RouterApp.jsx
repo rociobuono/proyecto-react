@@ -8,6 +8,7 @@ import Backoffice from './Layouts/Backoffice';
 import Inicio from "./Pages/Inicio";
 import Login from "./Pages/Login";
 import Nosotros from "./Pages/Nosotros";
+import Contacto from "./Pages/Contacto";
 // ----- CONSIGNA ----- //
 /**
   En este repositorio, encontraran una instalacion minima Vite y React Router Dom.
@@ -66,11 +67,12 @@ const RouterApp = (props) => {
   }
 
   useEffect(() => {
-    if (localStorage.getItem("usrData")) {
+    if (localStorage.getItem("token")) {
       setProtectedRoutes(
         <>
           {baseFrontRoutes("/inicio", <Inicio/>)}  
           {baseFrontRoutes("/nosotros", <Nosotros/>)}  
+          {baseFrontRoutes("/contacto", <Contacto/>)}  
           {baseFrontRoutes("*", <>404</>)}   
         </>
       );
