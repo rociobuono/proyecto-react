@@ -4,7 +4,7 @@ import TextInput from "../Components/TextInput";
 import Buttons from "../Components/Buttons";
 import { POST } from "../Services/Fetch.js";
 
-const url = "signup";
+const url = "AuthController/post";
 
 const Signup = () => {
     const [formData, setFormData] = useState({ Username: '', Password: '' });
@@ -14,14 +14,14 @@ const Signup = () => {
             window.alert("Complete los campos para continuar.");
         }
         try {
-            const response = await GET(url, formData); 
+            const response = await POST(url, formData); 
             localStorage.setItem('token', response?.accessToken); 
             if(localStorage.getItem('token')){
                 window.location.replace("/inicio");
             }
 
         } catch (error) {
-            console.error("Error al iniciar sesión:", error);
+            console.error("Error al crear cuenta:", error);
             window.alert("Ocurrió un error. Inténtalo de nuevo.");
         }
     }
@@ -69,7 +69,7 @@ const Signup = () => {
                     <div>
                         <Buttons
                             type="submit"
-                            className={'flex w-full justify-center rounded-md bg-stone-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600'}
+                            className={'flex w-full justify-center rounded-md bg-stone-500 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-stone-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600'}
                             callback={() => { signup() }}
                             txt={'Sign up'}
                         />
