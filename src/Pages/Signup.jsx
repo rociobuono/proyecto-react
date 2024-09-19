@@ -9,17 +9,12 @@ const url = "AuthController/post";
 const Signup = () => {
     const [formData, setFormData] = useState({ Username: '', Password: '' });
     const signup = async() => {
-        event.preventDefault();
         if (!formData.Username ) {
             window.alert("Complete los campos para continuar.");
         }
         try {
             const response = await POST(url, formData); 
-            localStorage.setItem('token', response?.accessToken); 
-            if(localStorage.getItem('token')){
-                window.location.replace("/inicio");
-            }
-
+            console.log(response);
         } catch (error) {
             console.error("Error al crear cuenta:", error);
             window.alert("Ocurrió un error. Inténtalo de nuevo.");
