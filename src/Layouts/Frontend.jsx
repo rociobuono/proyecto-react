@@ -27,6 +27,10 @@ const Frontend = (props) => {
                 {
                     to: '/contacto',
                     text: 'Contacto'
+                },
+                {
+                    to: '/recetas',
+                    text: 'Recetas'
                 }
             ]
             setIsLoggedIn(true);
@@ -42,43 +46,46 @@ const Frontend = (props) => {
     }
     return (
         <>
-            <header id="header" className="w-[100vw] h-[3rem] bg-custom-gray flex items-center justify-around fixed top-0 left-0 z-50">
-                <a href="#" class="-m-1.5 p-1.5">
-                    <span class="sr-only">Your Company</span>
-                    <img class="h-8 w-auto" src="public\granos-de-cafe.png" alt=""/>
-                </a>
-                <div className="flex">
-                    {
-                        // Mapea y renderiza los botones solo si MENU_DATA tiene elementos
-                        MENU_DATA.length > 0 ? (
+            <header
+                id="header"
+                className="w-[100vw] h-[3rem] bg-custom-gray flex items-center justify-between fixed top-0 left-0 z-50 px-8"
+            >
+                {/* Left side empty for spacing */}
+                <div className="flex-1"></div>
+    
+                {/* Centered logo and buttons */}
+                <div className="flex items-center space-x-8">
+                    {/* Logo */}
+                    <a href="#" className="p-1.5">
+                        <span className="sr-only">Your Company</span>
+                        <img className="h-8 w-auto" src="public\chef-hat.png" alt="Logo" />
+                    </a>
+    
+                    {/* Buttons */}
+                    <div className="flex space-x-4">
+                        {MENU_DATA.length > 0 ? (
                             MENU_DATA.map((item, index) => (
-                                <ButtonsLink
-                                    txt={item.text}
-                                    url={item.to}
-                                    key={index}
-                                />
-
+                                <ButtonsLink txt={item.text} url={item.to} key={index} />
                             ))
                         ) : (
-                            // Muestra un mensaje si MENU_DATA está vacío
-                            <span className="text-white">Welcome! Please log in to access more features.</span>
-                        )
-                    }
+                            <span className="text-white">
+                                Welcome! Please log in to access more features.
+                            </span>
+                        )}
+                    </div>
                 </div>
-<div></div>
+    
+                {/* LogOut button aligned to the right */}
                 {isLoggedIn && (
-                    <div>
-                        <Buttons
-                            txt={'LogOut'}
-                            callback={logOut}
-                        />
+                    <div className="flex-1 flex justify-end mr-4"> {/* Added flex-1 to ensure proper spacing */}
+                        <Buttons txt={'LogOut'} callback={logOut} />
                     </div>
                 )}
             </header>
             {props.children}
         </>
     );
-
+    
 
 
 
