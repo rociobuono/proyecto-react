@@ -8,18 +8,22 @@ import { POST } from "../Services/Fetch.js";
 const url = "login"
 const Login =  () => {
     const [formData, setFormData] = useState({ Username: '', Password: '' });
-
-    const login = async () => {
+    const login = async (event) => {
         event.preventDefault();
         if (!formData.Username ) {
             window.alert("Complete los campos para continuar.");
         }
         try {
             const response = await POST(url, formData); // Llama a la función POST con los datos del formulario
-            
-            localStorage.setItem('token', response?.accessToken); 
+            if(response?.accessToken) {
+                localStorage.setItem('token', response?.accessToken); 
+                
             if(localStorage.getItem('token')){
                 window.location.replace("/inicio");
+
+            }
+
+                
             }
 
         } catch (error) {
