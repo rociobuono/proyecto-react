@@ -1,11 +1,14 @@
 import React from "react";
 import { useState } from "react";
-const SearchBar = () => {
+const SearchBar = ({onSearch}) => {
     const [query, setQuery] = useState("");
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        // Perform search with query
+        if (query.trim()) {
+            onSearch(query); // Llama a la función de búsqueda pasada como prop
+            setQuery(""); // Limpiar el input después de la búsqueda
+        }
     };
     return (
         <div class='max-w-md mx-auto'>

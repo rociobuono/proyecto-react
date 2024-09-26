@@ -16,8 +16,11 @@ export async function POST(url, data){
     .catch((err) => console.log(err));
 };
 
-export async function GET(url, data){
-
+export async function GET(url, data, backend = false){
+    let fullUrl = backendurl;
+    if(backend){
+        fullUrl = backend;
+    }
     let objString = '?';
     if(Array.isArray(data))
     {
@@ -28,7 +31,7 @@ export async function GET(url, data){
         objString = objString + new URLSearchParams(data).toString();
     }
 
-    return await fetch(backendurl + url + objString, {
+    return await fetch(fullUrl + url + objString, {
         method: 'GET',
         mode: 'cors',
         headers: {
