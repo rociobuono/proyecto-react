@@ -9,7 +9,6 @@ const url = "AuthController/post";
 const Signup = () => {
     const [formData, setFormData] = useState({ Username: '', Password: '' });
     const signup = async() => {
-        event.preventDefault();
         if (!formData.Username ) {
             window.alert("Complete los campos para continuar.");
         }

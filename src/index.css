@@ -23,7 +23,7 @@
 }
 
 body {
-  background: linear-gradient(white, whitesmoke);
+  background: linear-gradient(white, #d6d3d1);
   min-height: 100vh;
   min-width: 100%;
 }
