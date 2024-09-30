@@ -52,7 +52,7 @@ const Frontend = (props) => {
             >
                 {/* Left side empty for spacing */}
                 <div className="flex-1"></div>
-    
+
                 {/* Centered logo and buttons */}
                 <div className="flex items-center space-x-8">
                     {/* Logo */}
@@ -60,7 +60,7 @@ const Frontend = (props) => {
                         <span className="sr-only">Your Company</span>
                         <img className="h-8 w-auto" src="public\chef-hat.png" alt="Logo" />
                     </a>
-    
+
                     {/* Buttons */}
                     <div className="flex space-x-4">
                         {MENU_DATA.length > 0 ? (
@@ -71,10 +71,11 @@ const Frontend = (props) => {
                             <span className="text-white">
                                 Welcome! Please log in to access more features.
                             </span>
+
                         )}
                     </div>
                 </div>
-    
+
                 {/* LogOut button aligned to the right */}
                 {isLoggedIn && (
                     <div className="flex-1 flex justify-end mr-4"> {/* Added flex-1 to ensure proper spacing */}
@@ -85,7 +86,7 @@ const Frontend = (props) => {
             {props.children}
         </>
     );
-    
+
 
 
 

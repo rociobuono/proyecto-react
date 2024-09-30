@@ -7,24 +7,23 @@ const Inicio = () => {
                 {/* Welcome Section */}
                 <div className="text-center">
                     <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">
-                        Welcome to Our Website
+                        Bienvenido a Nuestro Recetario
                     </h1>
                     <p className="mt-6 text-lg leading-8 text-gray-600">
-                        Discover our features and services that can help you achieve your goals. Explore our website to learn more.
-                    </p>
+                        Descubre una variedad de recetas deliciosas que transformarán tus comidas. Desde platos tradicionales hasta opciones innovadoras, tenemos algo para cada gusto.                    </p>
                     <div className="mt-8 flex justify-center gap-x-6">
-                        <a href="/nosotros" className="text-lg font-semibold text-stone-500 hover:text-indigo-700">
-                            Learn More
+                        <a href="/recetas" className="text-lg font-semibold text-stone-500 hover:text-indigo-700">
+                            Nuestras Recetas
                             <span aria-hidden="true"> &rarr;</span>
                         </a>
                         <a href="/contacto" className="text-lg font-semibold text-stone-500 hover:text-indigo-700">
-                            Contact Us
+                            Contactanos
                             <span aria-hidden="true"> &rarr;</span>
                         </a>
                     </div>
                 </div>
-                </div>
-                </div>
+            </div>
+        </div>
 
     );
 }
