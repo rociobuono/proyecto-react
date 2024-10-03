@@ -50,11 +50,8 @@ const Frontend = (props) => {
                 id="header"
                 className="w-[100vw] h-[3rem] bg-custom-gray flex items-center justify-between fixed top-0 left-0 z-50 px-8"
             >
-                {/* Left side empty for spacing */}
-                <div className="flex-1"></div>
-
                 {/* Centered logo and buttons */}
-                <div className="flex items-center space-x-8">
+                <div className="flex items-center justify-center flex-grow space-x-8">
                     {/* Logo */}
                     <a href="#" className="p-1.5">
                         <span className="sr-only">Your Company</span>
@@ -78,7 +75,7 @@ const Frontend = (props) => {
 
                 {/* LogOut button aligned to the right */}
                 {isLoggedIn && (
-                    <div className="flex-1 flex justify-end mr-4"> {/* Added flex-1 to ensure proper spacing */}
+                    <div className="flex-shrink-0"> {/* Added flex-1 to ensure proper spacing */}
                         <Buttons txt={'LogOut'} callback={logOut} />
                     </div>
                 )}
