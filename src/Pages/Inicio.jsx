@@ -12,11 +12,11 @@ const Inicio = () => {
                     <p className="mt-6 text-lg leading-8 text-gray-600">
                         Descubre una variedad de recetas deliciosas que transformarán tus comidas. Desde platos tradicionales hasta opciones innovadoras, tenemos algo para cada gusto.                    </p>
                     <div className="mt-8 flex justify-center gap-x-6">
-                        <a href="/recetas" className="text-lg font-semibold text-stone-500 hover:text-indigo-700">
+                        <a href="/recetas" className="text-lg font-semibold text-stone-500 hover:text-stone-700">
                             Nuestras Recetas
                             <span aria-hidden="true"> &rarr;</span>
                         </a>
-                        <a href="/contacto" className="text-lg font-semibold text-stone-500 hover:text-indigo-700">
+                        <a href="/contacto" className="text-lg font-semibold text-stone-500 hover:text-stone-700">
                             Contactanos
                             <span aria-hidden="true"> &rarr;</span>
                         </a>
