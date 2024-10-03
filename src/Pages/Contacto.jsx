@@ -5,11 +5,9 @@ const Contacto = () => {
         <section class="bg-white dark:bg-gray-900">
             <div class="container px-6 py-12 mx-auto">
                 <div class="text-center">
-                    <p class="font-medium text-stone-500 dark:text-blue-400">Contact us</p>
+                    <h1 class="mt-2 text-2xl font-semibold text-gray-800 md:text-3xl dark:text-white">Contactanos!</h1>
 
-                    <h1 class="mt-2 text-2xl font-semibold text-gray-800 md:text-3xl dark:text-white">Get in touch</h1>
-
-                    <p class="mt-3 text-gray-500 dark:text-gray-400">Our friendly team is always here to chat.</p>
+                  
                 </div>
 
                 <div class="grid grid-cols-1 gap-12 mt-10 md:grid-cols-2 lg:grid-cols-3">
@@ -21,8 +19,8 @@ const Contacto = () => {
                         </span>
 
                         <h2 class="mt-4 text-lg font-medium text-gray-800 dark:text-white">Email</h2>
-                        <p class="mt-2 text-gray-500 dark:text-gray-400">Our friendly team is here to help.</p>
-                        <p class="mt-2 text-blue-500 dark:text-blue-400">hello@merakiui.com</p>
+                        <p class="mt-2 text-gray-500 dark:text-gray-400">Nuestro equipo esta aquí para ayudarte.</p>
+                        <p class="mt-2 text-blue-500 dark:text-blue-400">rociobuono@hotmail.com <span>kevinquikuen@hotmail.com</span></p>
                     </div>
 
                     <div class="flex flex-col items-center justify-center text-center">
@@ -33,9 +31,9 @@ const Contacto = () => {
                             </svg>
                         </span>
 
-                        <h2 class="mt-4 text-lg font-medium text-gray-800 dark:text-white">Office</h2>
-                        <p class="mt-2 text-gray-500 dark:text-gray-400">Come say hello at our office HQ.</p>
-                        <p class="mt-2 text-blue-500 dark:text-blue-400">100 Smith Street Collingwood VIC 3066 AU</p>
+                        <h2 class="mt-4 text-lg font-medium text-gray-800 dark:text-white">Oficina</h2>
+                        <p class="mt-2 text-gray-500 dark:text-gray-400">Ven a visitarnos a nuestra oficina.</p>
+                        <p class="mt-2 text-blue-500 dark:text-blue-400">25 de Mayo 2809, Mar del Plata, Provincia de Buenos Aires</p>
                     </div>
 
                     <div class="flex flex-col items-center justify-center text-center">
@@ -45,9 +43,9 @@ const Contacto = () => {
                             </svg>
                         </span>
 
-                        <h2 class="mt-4 text-lg font-medium text-gray-800 dark:text-white">Phone</h2>
-                        <p class="mt-2 text-gray-500 dark:text-gray-400">Mon-Fri from 8am to 5pm.</p>
-                        <p class="mt-2 text-blue-500 dark:text-blue-400">+1 (555) 000-0000</p>
+                        <h2 class="mt-4 text-lg font-medium text-gray-800 dark:text-white">Telefono</h2>
+                        <p class="mt-2 text-gray-500 dark:text-gray-400">Lun-Vie de 8am a 12:20 pm.</p>
+                        <p class="mt-2 text-blue-500 dark:text-blue-400">0223 493-2525</p>
                     </div>
                 </div>
             </div>

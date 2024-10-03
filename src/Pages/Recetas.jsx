@@ -10,24 +10,34 @@ const Recetas = () => {
     });
 
     const [recipes, setRecipes] = useState([]);
+    const [randomRecipes, setRandomRecipes] = useState([]);
+    const [hasSearched, setHasSearched] = useState(false);
 
     let back = "https://api.spoonacular.com";
     let uri = "/recipes/complexSearch";
 
+    
     const getRecipe = async () => {
-        if (!recFilter.query) return;  // No hacer la búsqueda si la consulta está vacía
+        if (!recFilter.query) {
+            const rsp = await GET(uri, recFilter, back);
+            setRandomRecipes(rsp.results || []);
+        }
+              
         try {
             const rsp = await GET(uri, recFilter, back);
             setRecipes(rsp.results || []); // Ajusta según tu respuesta
-            console.log(rsp.results);
+            setHasSearched(true);
         } catch (error) {
             console.error("Error fetching recipes:", error);
         }
     };
 
+
     useEffect(() => {
         getRecipe()
     }, [recFilter.query]);
+
+    
 
     const handleSearch = (query) => {
         setRecFilter({
@@ -36,15 +46,14 @@ const Recetas = () => {
         });
     };
 
-    function getNumber(min, max){
+    function getNumber(min, max) {
         return Math.floor(Math.random() * (max - min) + min);
     }
     function getRandomString(array) {
         const randomIndex = Math.floor(Math.random() * array.length);
         return array[randomIndex];
     }
-    
-    // Ejemplo de uso:
+
     const stringsArray = ["easy", "medium", "difficult"];
     return (
         <>
@@ -54,6 +63,22 @@ const Recetas = () => {
             <SearchBar
                 onSearch={handleSearch}
             />
+            {!hasSearched && (
+                    <>
+                        <div className="grid gap-4 gap-y-8 md:grid-cols-2 lg:grid-cols-3 mb-16">
+                            {randomRecipes.map((recipe) => (
+                                <Cards
+                                    title={recipe.title}
+                                    img={recipe.image} 
+                                    time={getNumber(15, 60)}
+                                    ingredients={getNumber(5, 10)}
+                                    servings={getNumber(1, 4)}
+                                    difficulty={getRandomString(stringsArray)}
+                                />
+                            ))}
+                        </div>
+                    </>
+                )}
             <div className="container mx-auto p-4">
                 <div className="grid gap-4 gap-y-8 md:grid-cols-2 lg:grid-cols-3 mb-16">
                     {recipes.map((recipe) => (
@@ -61,8 +86,8 @@ const Recetas = () => {
                             img={recipe.image}
                             title={recipe.title}
                             time={getNumber(15, 60)}
-                            ingredients={getNumber(5,10)}
-                            servings={getNumber(1,4)}
+                            ingredients={getNumber(5, 10)}
+                            servings={getNumber(1, 4)}
                             difficulty={getRandomString(stringsArray)}
                         />
                     ))}
