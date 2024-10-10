@@ -8,17 +8,20 @@ const url = "AuthController/post";
 
 const Signup = () => {
     const [formData, setFormData] = useState({ Username: '', Password: '' });
-    const signup = async() => {
-        if (!formData.Username ) {
+    const signup = async(e) => {
+        e.preventDefault();
+        if (!formData.Username || !formData.Password) {
             window.alert("Complete los campos para continuar.");
-        }
+        }   
         try {
-            const response = await POST(url, formData); 
-            localStorage.setItem('token', response?.accessToken); 
-            if(localStorage.getItem('token')){
-                window.location.replace("/inicio");
-            }
-
+            const response = await POST(url, formData);
+        if (response?.succes) { 
+            window.alert("Usuario creado correctamente. Inicie sesion para continuar.");
+            window.location.replace("/login");
+        } else {
+            //window.alert("Respuesta: " + response?.message || "Ocurrió un error. Inténtalo de nuevo.");
+        }
+           
         } catch (error) {
             console.error("Error al crear cuenta:", error);
             window.alert("Ocurrió un error. Inténtalo de nuevo.");
