@@ -21,9 +21,9 @@ const Login =  () => {
             if(localStorage.getItem('token')){
                 window.location.replace("/inicio");
 
-            }
-
-                
+            }       
+            }else{
+                window.alert("Contraseña o usuario incorrectos. Intentelo de nuevo.");
             }
 
         } catch (error) {
@@ -63,11 +63,7 @@ const Login =  () => {
                             <label htmlFor="password" className="block text-sm font-medium leading-6 text-gray-900">
                                 Password
                             </label>
-                            <div className="text-sm">
-                                <a  className="font-semibold text-stone-500 hover:text-indigo-500">
-                                    Forgot password?
-                                </a>
-                            </div>
+                          
                         </div>
                         <div className="mt-2">
                             <TextInput
