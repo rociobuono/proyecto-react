@@ -46,6 +46,7 @@ const Frontend = (props) => {
     }
     return (
         <>
+            {
             <header
                 id="header"
                 className="w-[100vw] h-[3rem] bg-custom-gray flex items-center justify-between fixed top-0 left-0 z-50 px-8"
@@ -80,8 +81,10 @@ const Frontend = (props) => {
                     </div>
                 )}
             </header>
+            }
             {props.children}
-        </>
+        </> 
+
     );
 
 
