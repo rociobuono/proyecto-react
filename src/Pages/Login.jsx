@@ -9,7 +9,7 @@ const url = "login"
 const Login =  () => {
     const [formData, setFormData] = useState({ Username: '', Password: '' });
     const login = async (event) => {
-        event.preventDefault();
+        //event.preventDefault();
         if (!formData.Username ) {
             window.alert("Complete los campos para continuar.");
         }
@@ -43,17 +43,17 @@ const Login =  () => {
             </div>
 
             <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-                <form onSubmit={login}  className="space-y-6">
+                <div onSubmit={login}  className="space-y-6">
                     <div>
-                        <label htmlFor="username" className="block text-sm font-medium leading-6 text-gray-900">
+                        <label htmlFor="Usuario" className="block text-sm font-medium leading-6 text-gray-900">
                             Username 
                         </label>
                         <div className="mt-2">
                             <TextInput
                                 type={'text'}
                                 //placeholder={'Username'}
-                                callback={(e) => { setFormData({ ...formData, Username: e.target.value }) }}
-                                id={'username'}
+                                callback={(e) => { setFormData({ ...formData, Usuario: e.target.value }) }}
+                                id={'Usuario'}
                             />
                         </div>
                     </div>
@@ -87,7 +87,7 @@ const Login =  () => {
                             txt={'Login'}
                         />
                     </div>
-                </form>
+                </div>
 
                 <p className="mt-10 text-center text-sm text-gray-500">
                     Not a member?{' '}
