@@ -11,6 +11,7 @@ import Nosotros from "./Pages/Nosotros";
 import Contacto from "./Pages/Contacto";
 import Signup from "./Pages/Signup";
 import Recetas from "./Pages/Recetas";
+import Agregar from "./Pages/Agregar";
 // ----- CONSIGNA ----- //
 /**
   En este repositorio, encontraran una instalacion minima Vite y React Router Dom.
@@ -77,6 +78,7 @@ const RouterApp = (props) => {
           {baseFrontRoutes("/contacto", <Contacto/>)}  
           {baseFrontRoutes("/signup", <Signup/>)}
           {baseFrontRoutes("/recetas", <Recetas/>)}
+          {baseFrontRoutes("/agregar", <Agregar/>)}
           {baseFrontRoutes("*", <>404</>)}   
         </>
       );

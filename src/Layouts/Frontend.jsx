@@ -31,6 +31,10 @@ const Frontend = (props) => {
                 {
                     to: '/recetas',
                     text: 'Recetas'
+                },
+                {
+                    to: '/agregar',
+                    text: 'Nueva Receta'
                 }
             ]
             setIsLoggedIn(true);

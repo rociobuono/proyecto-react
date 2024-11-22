@@ -6,6 +6,7 @@ bg-indigo-500
 bg-pink-500
 bg-red-500
 bg-stone-300
+bg-stone-400
 bg-stone-500
 bg-stone-600
 /* Border Colors */
