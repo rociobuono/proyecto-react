@@ -29,7 +29,7 @@ const Agregar = () => {
   return (
     <div className="p-8 bg-gray-100 h-screen flex justify-center items-center">
       <form
-        onSubmit={handleSubmit}
+        onSubmit={agregarReceta}
         className="w-full max-w-md bg-white p-6 rounded-lg shadow-md"
       >
         <h2 className="text-2xl font-bold mb-4 text-center">Agregar Receta</h2>
