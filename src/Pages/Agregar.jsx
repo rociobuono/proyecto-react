@@ -1,5 +1,8 @@
 import React, { useState } from "react";
 import Buttons from "../Components/Buttons";
+import { POST } from "../Services/Fetch";
+
+const url = "RecetasController/post"
 
 const Agregar = () => {
   const [formData, setFormData] = useState({
@@ -19,11 +22,18 @@ const Agregar = () => {
     }));
   };
 
-  const agregarReceta = (e) => {
+  const agregarReceta = async (e) => {
     e.preventDefault();
-    console.log("Datos de la receta:", formData);
-    // Aquí podrías agregar una llamada a una API o lógica adicional para enviar los datos.
-    alert("Receta agregada exitosamente!");
+    if (!formData.nombre || !formData.descripcion || !formData.tiempo || !formData.ingredientes || !formData.porciones) {
+      window.alert("Complete los campos para continuar.");
+      return;
+    }
+    const response = await POST(url, formData);
+    if (response.ok) {
+      alert("Receta agregada exitosamente!");
+    } else {
+      alert("Hubo un problema al agregar la receta.");
+    }
   };
 
   return (
@@ -123,19 +133,19 @@ const Agregar = () => {
             onChange={handleChange}
             className="w-full px-3 py-2 border rounded-lg"
           >
-            <option value="Fácil">Fácil</option>
-            <option value="Intermedia">Intermedia</option>
-            <option value="Difícil">Difícil</option>
+            <option value="1">Fácil</option>
+            <option value="2">Intermedia</option>
+            <option value="3">Difícil</option>
           </select>
         </div>
 
         {/* Botón de Enviar */}
         <Buttons
-            type="submit"
-             className="w-full bg-stone-500 text-white font-medium py-2 rounded-lg hover:bg-stone-600"
-             callback={() => { agregarReceta() }}
-             txt={'Agregar Receta'}
-        />   
+          type="submit"
+          className="w-full bg-stone-500 text-white font-medium py-2 rounded-lg hover:bg-stone-600"
+          //callback={() => { agregarReceta() }}
+          txt={'Agregar Receta'}
+        />
       </form>
     </div>
   );

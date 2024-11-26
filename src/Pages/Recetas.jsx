@@ -83,6 +83,7 @@ const Recetas = () => {
                 <div className="grid gap-4 gap-y-8 md:grid-cols-2 lg:grid-cols-3 mb-16">
                     {recipes.map((recipe) => (
                         <Cards
+                            key={recipe.id}
                             img={recipe.image}
                             title={recipe.title}
                             time={getNumber(15, 60)}
