@@ -33,7 +33,9 @@ const Recetas = () => {
         return dificultad ? dificultad.dificultad : "Desconocida";
     };
 
-
+    const handleDelete = (id) => {
+        setRecipes((prevRecipes) => prevRecipes.filter((recipe) => recipe.id !== id));
+      };
     return (
         <>
             <div className="container px-6 pt-20 pb-5 mx-auto">
@@ -70,6 +72,7 @@ const Recetas = () => {
                                 servings={receta.porciones}
                                 difficulty={getDificultad(receta.fk_dificultad)}
                                 description={receta.receta}
+                                onDelete={handleDelete}
                             />
                         </>
 

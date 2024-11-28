@@ -1,0 +1,116 @@
+
+import React, { useState, useEffect } from "react";
+import { GET } from "../Services/Fetch";
+
+const EditModal = ({ title, ingredients, servings, difficulty, description, onChange, onSave, onClose }) => {
+  const [dificultades, setDificultades] = useState([]);
+  useEffect(() => {
+    const fetchDificultades = async () => {
+      try {
+
+        const data = await GET("Dificultades/Get");
+        console.log(data.data);
+        setDificultades(data.data);
+      } catch (error) {
+        console.error("Error en la petición:", error);
+      }
+    };
+    fetchDificultades();
+  }, []);
+  return (
+    <div className="fixed inset-0 flex items-center justify-center z-50">
+      <div className="bg-white p-4 rounded-lg shadow-lg w-96">
+        <h2 className="text-2xl font-bold mb-4">Editar Receta</h2>
+
+        <div className="mb-4">
+          <label className="block text-gray-700 mb-2">Título</label>
+          <input
+            type="text"
+            name="title"
+            value={title}
+            onChange={onChange}
+            className="w-full px-3 py-2 border rounded-lg"
+            required
+            maxLength={20}
+          />
+        </div>
+
+        <div className="mb-4">
+          <label className="block text-gray-700 mb-2">Descripción</label>
+          <textarea
+            name="description"
+            value={description}
+            onChange={onChange}
+            className="w-full px-3 py-2 border rounded-lg"
+            required
+            maxLength={1000}
+          ></textarea>
+
+        </div>
+
+        <div className="mb-4">
+          <label className="block text-gray-700 mb-2">Ingredientes</label>
+          <textarea
+            type="number"
+            name="ingredients"
+            value={ingredients}
+            onChange={onChange}
+            className="w-full px-3 py-2 border rounded-lg"
+            required
+            maxLength={500}
+          ></textarea>
+        </div>
+
+        <div className="mb-4">
+          <label className="block text-gray-700 mb-2">Porciones</label>
+          <input
+            type="number"
+            name="servings"
+            value={servings}
+            onChange={onChange}
+            className="w-full px-3 py-2 border rounded-lg"
+            required
+          />
+        </div>
+
+        <div className="mb-4">
+          <label className="block text-gray-700 mb-2">Dificultad</label>
+          <select
+            name="difficulty"
+            value={difficulty}
+            onChange={onChange}
+            className="w-full px-3 py-2 border rounded-lg"
+          >
+            {dificultades.length === 0 ? (
+              <option value="">Cargando dificultades...</option>
+            ) : (
+              dificultades.map((dificultad) => (
+                <option key={dificultad.dificultad_id} value={dificultad.dificultad_id}> {dificultad.dificultad}
+                </option>
+              ))
+            )}
+          </select>
+        </div>
+
+
+
+        <div className="flex justify-end space-x-2">
+          <button
+            className="bg-red-500 hover:bg-red-700 text-white px-4 py-2 rounded-lg"
+            onClick={onClose}
+          >
+            Cancelar
+          </button>
+          <button
+            className="bg-green-500 hover:bg-green-700 text-white px-4 py-2 rounded-lg"
+            onClick={onSave}
+          >
+            Guardar
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default EditModal;

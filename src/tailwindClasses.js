@@ -4,11 +4,16 @@
 bg-yellow-500
 bg-indigo-500
 bg-pink-500
+bg-red-300
 bg-red-500
+bg-blue-400
+bg-blue-600
 bg-stone-300
 bg-stone-400
 bg-stone-500
 bg-stone-600
+bg-stone-700
+
 /* Border Colors */
 border-green-700
 border-yellow-700
