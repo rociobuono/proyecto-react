@@ -7,11 +7,12 @@ import { POST } from "../Services/Fetch.js";
 const url = "AuthController/post";
 
 const Signup = () => {
-    const [formData, setFormData] = useState({ Username: '', Password: '' });
+    const [formData, setFormData] = useState({ Usuario: '', Password: '' });
     const signup = async(e) => {
         e.preventDefault();
-        if (!formData.Username || !formData.Password) {
+        if (!formData.Usuario || !formData.Password) {
             window.alert("Complete los campos para continuar.");
+            return;
         }   
         try {
             const response = await POST(url, formData);
@@ -19,8 +20,8 @@ const Signup = () => {
             window.alert("Usuario creado correctamente. Inicie sesion para continuar.");
             window.location.replace("/login");
         } else {
-            //window.alert("Respuesta: " + response?.message || "Ocurrió un error. Inténtalo de nuevo.");
-        }
+            const errorMessage = response?.message || "Ocurrió un error. Inténtalo de nuevo.";
+            window.alert("Respuesta: " + errorMessage);        }
            
         } catch (error) {
             console.error("Error al crear cuenta:", error);
@@ -46,7 +47,7 @@ const Signup = () => {
                             <TextInput
                                 type={'text'}
                                 //placeholder={'Username'}
-                                callback={(e) => { setFormData({ ...formData, Username: e.target.value }) }}
+                                callback={(e) => { setFormData({ ...formData, Usuario: e.target.value }) }}
                                 id={'username'}
                             />
                         </div>
@@ -72,7 +73,7 @@ const Signup = () => {
                         <Buttons
                             type="submit"
                             className={'flex w-full justify-center rounded-md bg-stone-500 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-stone-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600'}
-                            callback={() => { signup() }}
+                           callback={() => { signup() }}
                             txt={'Sign up'}
                         />
                     </div>

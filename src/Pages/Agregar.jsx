@@ -1,19 +1,21 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Buttons from "../Components/Buttons";
 import { POST } from "../Services/Fetch";
-
-const url = "RecetasController/post"
+import { data } from "autoprefixer";
+import { GET } from "../Services/Fetch";
+const url = "Recetas/post"
 
 const Agregar = () => {
+
+  const [dificultades, setDificultades] = useState([]);
   const [formData, setFormData] = useState({
     nombre: "",
-    descripcion: "",
-    tiempo: "",
+    receta: "",
     ingredientes: "",
     porciones: "",
-    dificultad: "Fácil", // Valor predeterminado
+    fk_dificultad: 1,
   });
-
+ 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevState) => ({
@@ -22,20 +24,47 @@ const Agregar = () => {
     }));
   };
 
+
   const agregarReceta = async (e) => {
     e.preventDefault();
-    if (!formData.nombre || !formData.descripcion || !formData.tiempo || !formData.ingredientes || !formData.porciones) {
+    if (!formData.nombre || !formData.receta || !formData.ingredientes || !formData.porciones) {
       window.alert("Complete los campos para continuar.");
       return;
     }
     const response = await POST(url, formData);
-    if (response.ok) {
+    if (!response.ok) {
       alert("Receta agregada exitosamente!");
+      limpiarCampos();
+
     } else {
       alert("Hubo un problema al agregar la receta.");
     }
   };
 
+  useEffect(() => {
+    const fetchDificultades = async () => {
+      try {
+
+        const data = await GET("Dificultades/Get");
+        console.log(data.data);
+        setDificultades(data.data);
+      } catch (error) {
+        console.error("Error en la petición:", error);
+      }
+    };
+    fetchDificultades();
+  }, []);
+
+  const limpiarCampos = () => {
+    setFormData({
+      nombre: "",
+      receta: "",
+      ingredientes: "",
+      porciones: "",
+      fk_dificultad: "",
+    })
+  }
+  
   return (
     <div className="p-8 bg-gray-100 h-screen flex justify-center items-center">
       <form
@@ -51,13 +80,16 @@ const Agregar = () => {
           </label>
           <input
             type="text"
+            id="nombre"
             name="nombre"
             value={formData.nombre}
             onChange={handleChange}
             className="w-full px-3 py-2 border rounded-lg"
             placeholder="Ej: Pastel de Chocolate"
             required
+            maxLength={20}
           />
+
         </div>
 
         {/* Campo Descripción */}
@@ -66,29 +98,15 @@ const Agregar = () => {
             Descripción:
           </label>
           <textarea
-            name="descripcion"
-            value={formData.descripcion}
+            name="receta"
+            id="receta"
+            value={formData.receta}
             onChange={handleChange}
             className="w-full px-3 py-2 border rounded-lg"
             placeholder="Descripción breve de la receta"
             required
+            maxLength={1000}
           ></textarea>
-        </div>
-
-        {/* Campo Tiempo */}
-        <div className="mb-4">
-          <label className="block text-gray-700 font-medium mb-2">
-            Tiempo (en minutos):
-          </label>
-          <input
-            type="number"
-            name="tiempo"
-            value={formData.tiempo}
-            onChange={handleChange}
-            className="w-full px-3 py-2 border rounded-lg"
-            placeholder="Ej: 45"
-            required
-          />
         </div>
 
         {/* Campo Ingredientes */}
@@ -98,11 +116,13 @@ const Agregar = () => {
           </label>
           <textarea
             name="ingredientes"
+            id="ingredientes"
             value={formData.ingredientes}
             onChange={handleChange}
             className="w-full px-3 py-2 border rounded-lg"
             placeholder="Ej: Harina, Azúcar, Huevos"
             required
+            maxLength={500}
           ></textarea>
         </div>
 
@@ -128,14 +148,19 @@ const Agregar = () => {
             Dificultad:
           </label>
           <select
-            name="dificultad"
-            value={formData.dificultad}
+            name="fk_dificultad"
+            value={formData.fk_dificultad}
             onChange={handleChange}
             className="w-full px-3 py-2 border rounded-lg"
           >
-            <option value="1">Fácil</option>
-            <option value="2">Intermedia</option>
-            <option value="3">Difícil</option>
+            {dificultades.length === 0 ? (
+              <option value="">Cargando dificultades...</option>
+            ) : (
+              dificultades.map((dificultad) => (
+                <option key={dificultad.dificultad_id} value={dificultad.dificultad_id}> {dificultad.dificultad}
+                </option>
+              ))
+            )}
           </select>
         </div>
 
@@ -150,5 +175,6 @@ const Agregar = () => {
     </div>
   );
 };
+
 
 export default Agregar;

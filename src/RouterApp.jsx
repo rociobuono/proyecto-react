@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-
+import {jwtDecode} from "jwt-decode";
 //Layouts
 import Frontend from './Layouts/Frontend';
 import Backoffice from './Layouts/Backoffice';
@@ -8,7 +8,6 @@ import Backoffice from './Layouts/Backoffice';
 import Inicio from "./Pages/Inicio";
 import Login from "./Pages/Login";
 import Nosotros from "./Pages/Nosotros";
-import Contacto from "./Pages/Contacto";
 import Signup from "./Pages/Signup";
 import Recetas from "./Pages/Recetas";
 import Agregar from "./Pages/Agregar";
@@ -70,12 +69,17 @@ const RouterApp = (props) => {
   }
 
   useEffect(() => {
+    const token = localStorage.getItem("token");
     if (localStorage.getItem("token")) {
+      const decodedToken = jwtDecode(token);
+      const currentTime = Date.now() / 1000;
+      if (decodedToken.exp < currentTime) {
+        localStorage.removeItem("token");
+      }
       setProtectedRoutes(
         <>
           {baseFrontRoutes("/inicio", <Inicio/>)}  
           {baseFrontRoutes("/nosotros", <Nosotros/>)}  
-          {baseFrontRoutes("/contacto", <Contacto/>)}  
           {baseFrontRoutes("/signup", <Signup/>)}
           {baseFrontRoutes("/recetas", <Recetas/>)}
           {baseFrontRoutes("/agregar", <Agregar/>)}
@@ -89,7 +93,6 @@ const RouterApp = (props) => {
       </>);
     }
   }, [user])
-
 
   return (
     <>

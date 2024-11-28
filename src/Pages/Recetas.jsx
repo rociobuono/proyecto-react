@@ -3,98 +3,82 @@ import SearchBar from "../Components/SearchBar";
 import Cards from "../Components/Cards";
 import { GET } from '../Services/Fetch';
 import { useState } from "react";
+import Modal from "../Components/Modal";
+
 const Recetas = () => {
-    const [recFilter, setRecFilter] = useState({
-        apiKey: "6227a910824b42c0987f8d0f95decfeb",
-        query: ""
-    });
 
-    const [recipes, setRecipes] = useState([]);
-    const [randomRecipes, setRandomRecipes] = useState([]);
+    const [recetas, setRecetas] = useState([]);
+    const [dificultades, setDificultades] = useState([]);
+
     const [hasSearched, setHasSearched] = useState(false);
-
-    let back = "https://api.spoonacular.com";
-    let uri = "/recipes/complexSearch";
-
-    
-    const getRecipe = async () => {
-        if (!recFilter.query) {
-            const rsp = await GET(uri, recFilter, back);
-            setRandomRecipes(rsp.results || []);
-        }
-              
-        try {
-            const rsp = await GET(uri, recFilter, back);
-            setRecipes(rsp.results || []); // Ajusta según tu respuesta
-            setHasSearched(true);
-        } catch (error) {
-            console.error("Error fetching recipes:", error);
-        }
-    };
-
-
     useEffect(() => {
-        getRecipe()
-    }, [recFilter.query]);
+        const fetchData = async () => {
+            try {
 
-    
+                const dificultadesData = await GET("Dificultades/Get");
+                setDificultades(dificultadesData.data);
+                const recetasData = await GET("Recetas/Get");
+                //setRecetas(recetasData.data.filter((receta) => receta.fk_usuario === userId)); // Filtra las recetas por el usuario autenticado
+                setRecetas(recetasData.data);
+                console.log("Recetas recibidas desde la API:", recetasData);
+            } catch (error) {
+                console.error("Error en la petición:", error);
+            }
+        };
+        fetchData();
+    }, []);
 
-    const handleSearch = (query) => {
-        setRecFilter({
-            apiKey: recFilter.apiKey,  // Mantiene el apiKey
-            query: query.trim()  // Actualiza la query con el valor del input
-        });
+    const getDificultad = (fk_dificultad) => {
+        const dificultad = dificultades.find(d => d.dificultad_id === fk_dificultad);
+        return dificultad ? dificultad.dificultad : "Desconocida";
     };
 
-    function getNumber(min, max) {
-        return Math.floor(Math.random() * (max - min) + min);
-    }
-    function getRandomString(array) {
-        const randomIndex = Math.floor(Math.random() * array.length);
-        return array[randomIndex];
-    }
 
-    const stringsArray = ["easy", "medium", "difficult"];
     return (
         <>
             <div className="container px-6 pt-20 pb-5 mx-auto">
-                <h1 className="text-center text-yellow-950 text-5xl font-bold tracking-wide">Buscar recetas</h1>
+                <h1 className="text-center text-yellow-950 text-5xl font-bold tracking-wide">Mis recetas</h1>
             </div>
+            {/*
             <SearchBar
                 onSearch={handleSearch}
             />
             {!hasSearched && (
-                    <>
-                        <div className="grid gap-4 gap-y-8 md:grid-cols-2 lg:grid-cols-3 mb-16">
-                            {randomRecipes.map((recipe) => (
-                                <Cards
-                                    title={recipe.title}
-                                    img={recipe.image} 
-                                    time={getNumber(15, 60)}
-                                    ingredients={getNumber(5, 10)}
-                                    servings={getNumber(1, 4)}
-                                    difficulty={getRandomString(stringsArray)}
-                                />
-                            ))}
-                        </div>
-                    </>
-                )}
-            <div className="container mx-auto p-4">
-                <div className="grid gap-4 gap-y-8 md:grid-cols-2 lg:grid-cols-3 mb-16">
-                    {recipes.map((recipe) => (
-                        <Cards
-                            key={recipe.id}
-                            img={recipe.image}
-                            title={recipe.title}
-                            time={getNumber(15, 60)}
-                            ingredients={getNumber(5, 10)}
-                            servings={getNumber(1, 4)}
-                            difficulty={getRandomString(stringsArray)}
-                        />
-                    ))}
+                <>
+                    <div className="grid gap-4 gap-y-8 md:grid-cols-2 lg:grid-cols-3 mb-16">
+                        {recetas.map((recetas) => (
+                            <Cards
+                                title={recetas.nombre}
+                                time={recetas.tiempo}
+                                ingredients={recetas.ingredientes}
+                                servings={recetas.porciones}
+                                difficulty={dificultad.dificultad}
+                            />
+                        ))}
+                    </div>
+                </>
+            )}
+            */}
+            <div className="grid gap-4 gap-y-8 md:grid-cols-2 lg:grid-cols-3 mb-16">
+                {recetas.length > 0 ? (
+                    recetas.map((receta) => (
+                        <>
+                            <Cards
+                                key={receta.receta_id}
+                                title={receta.nombre}
+                                ingredients={receta.ingredientes}
+                                servings={receta.porciones}
+                                difficulty={getDificultad(receta.fk_dificultad)}
+                                description={receta.receta}
+                            />
+                        </>
 
-                </div>
+                    ))
+                ) : (
+                    <p>No hay recetas disponibles.</p>
+                )}
             </div>
+
         </>
 
     );

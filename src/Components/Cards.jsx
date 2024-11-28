@@ -1,20 +1,24 @@
 import React from "react";
-
+import Modal from "./Modal";
+import { useState } from 'react'
 const Cards = (props) => {
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const openModal = () => {
+        setIsModalOpen(true);
+    }
+
+    const closeModal = () => {
+        setIsModalOpen(false);
+    }
     return (
         <div className="bg-white rounded-md overflow-hidden relative shadow-md">
-            <div>
-                <img className="w-full" src={props.img} alt={props.title} />
-            </div>
+             {/*
+             <div>
+                <img class="w-full" src={props.img} alt={props.title} />
+            </div>*/}
             <div className="p-4">
                 <h2 className="text-2xl text-stone-600">{props.title}</h2>
-                <div className="flex justify-between mt-4 mb-4 text-gray-500">
-                    <div className="flex items-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                        </svg>
-                        <span className="ml-1 lg:text-xl">{props.time}</span>
-                    </div>
+                <div className="flex justify-between mt-4 mb-4 text-gray-500">           
                     <div className="flex items-center">
                         <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                             <path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z" />
@@ -29,12 +33,24 @@ const Cards = (props) => {
                         <span className="ml-1 lg:text-xl">{props.servings}</span>
                     </div>
                 </div>
-                <p className="mb-4 text-gray-500">{props.description}</p>
-                <button className="text-white bg-stone-400 hover:bg-stone-600 p-4 rounded-md w-full uppercase">View Recipe</button>
+
+                <button 
+                className="text-white bg-stone-400 hover:bg-stone-600 p-4 rounded-md w-full uppercase"
+                onClick={openModal}
+                >View Recipe</button>
             </div>
             <div className="absolute top-0 right-0 mt-4 mr-4 bg-stone-500 text-white rounded-full pt-1 pb-1 pl-4 pr-5 text-xs uppercase">
                 <span>{props.difficulty}</span>
             </div>
+            {/* Modal Component */}
+            {isModalOpen && (
+                <Modal 
+                    title={props.title} 
+                    description={props.description}
+                    closeModal={closeModal}
+                />
+            )}
+
         </div>
     );
 

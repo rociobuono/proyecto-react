@@ -7,13 +7,14 @@ const Inicio = () => {
                 {/* Welcome Section */}
                 <div className="text-center">
                     <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">
-                        Bienvenido a Nuestro Recetario
+                        Bienvenido a Tu Recetario
                     </h1>
                     <p className="mt-6 text-lg leading-8 text-gray-600">
-                        Descubre una variedad de recetas deliciosas que transformarán tus comidas. Desde platos tradicionales hasta opciones innovadoras, tenemos algo para cada gusto.                    </p>
+
+                        El lugar donde podrás guardar, organizar y compartir tus recetas más preciadas. Aquí encontrarás un espacio personal para almacenar todas tus creaciones culinarias y acceder a ellas cuando más las necesites. Ya sea que busques inspiración o desees revivir tus platos favoritos, Tu Recetario te acompañará en cada paso de tu aventura gastronómica.                 </p>
                     <div className="mt-8 flex justify-center gap-x-6">
                         <a href="/recetas" className="text-lg font-semibold text-stone-500 hover:text-stone-700">
-                            Nuestras Recetas
+                            Tus Recetas
                             <span aria-hidden="true"> &rarr;</span>
                         </a>
                         <a href="/contacto" className="text-lg font-semibold text-stone-500 hover:text-stone-700">
