@@ -72,6 +72,8 @@ export async function DELETE(url, data){
     .catch((err) => console.log(err));
 }
 
+
+
 export async function POSTU(url, file){
 
     let data = new FormData();

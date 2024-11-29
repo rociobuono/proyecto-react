@@ -63,10 +63,10 @@ const Recetas = () => {
             */}
             <div className="grid gap-4 gap-y-8 md:grid-cols-2 lg:grid-cols-3 mb-16">
                 {recetas.length > 0 ? (
-                    recetas.map((receta) => (
-                        <>
-                            <Cards
-                                key={receta.receta_id}
+                    recetas.map((receta,index) => (
+                        <div key={index}>
+                            <Cards  
+                                id={receta.receta_id}
                                 title={receta.nombre}
                                 ingredients={receta.ingredientes}
                                 servings={receta.porciones}
@@ -74,8 +74,7 @@ const Recetas = () => {
                                 description={receta.receta}
                                 onDelete={handleDelete}
                             />
-                        </>
-
+                        </div>
                     ))
                 ) : (
                     <p>No hay recetas disponibles.</p>

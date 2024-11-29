@@ -3,15 +3,17 @@ import Modal from "./Modal";
 import { useState } from 'react'
 import EditModal from "./EditModal";
 import { PATCH } from "../Services/Fetch";
+import { DELETE } from "../Services/Fetch";
 const Cards = (props) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [isEditModalOpen, setIsEditModalOpen] = useState(false);
     const [editedData, setEditedData] = useState({
-        title: props.title,
-        description: props.description,
-        ingredients: props.ingredients,
-        servings: props.servings,
-        difficulty: props.difficulty
+        id:props.id,
+        nombre: props.title,
+        receta: props.description,
+        ingredientes: props.ingredients,
+        porciones: props.servings,
+        fk_dificultad: props.fk_dificultad
     });
     const openModal = () => {
         setIsModalOpen(true);
@@ -27,11 +29,13 @@ const Cards = (props) => {
     const closeEditModal = () => {
         setIsEditModalOpen(false);
         setEditedData({
-            title: props.title,
-            ingredients: props.ingredients,
-            servings: props.servings,
-            difficulty: props.difficulty,
-            description: props.description
+            id:props.id,
+            nombre: props.nombre,
+            receta: props.receta,
+            ingredientes: props.ingredientes,
+            porciones: props.porciones,
+            fk_dificultad: props.fk_dificultad
+            
         });
     };
     const handleEditChange = (e) => {
@@ -41,35 +45,43 @@ const Cards = (props) => {
 
         }));
     };
+
     const saveEdit = async () => {
-        const url = `Recetas/Patch/${props.id}`;
-        const response = await PATCH(url, editedData);
-        if (response.ok) {
+        const url = `Recetas/Patch/`;
+        console.log(editedData)
+        const response = await PATCH(url,editedData);
+        if (response.success) {
             alert("Receta editada exitosamente!");
             closeEditModal();
         }
         else {
-            alert("Hubo un problema al editar la receta.");
+            alert(`Hubo un problema al editar la receta: ${response.message || 'Error desconocido'}`);
         }
     };
+
+    
+    
+
     const deleteRecipe = async () => {
-        const url = `Recetas/Delete/${props.id}`;
+        const url = `Recetas/Delete/`;
         const confirmDelete = window.confirm("¿Estás seguro de que quieres eliminar esta receta?");
         if (confirmDelete) {
-          try {
-            const response = await DELETE(url); // 
-            if (response.ok) {
-              alert("Receta eliminada exitosamente!");
-              props.onDelete(props.id); 
-            } else {
-              alert("Hubo un problema al eliminar la receta.");
+            try {
+                const response = await DELETE(url, { id: props.id }); // Enviar 'id' como parámetro de consulta
+                if (!response.ok) {
+                    alert("Receta eliminada exitosamente!");
+                    props.onDelete(props.id); 
+                } else {
+                    alert("Hubo un problema al eliminar la receta.");
+                }
+            } catch (error) {
+                /*console.error("Error eliminando la receta:", error);
+                alert("Ocurrió un error al eliminar la receta.");*/
             }
-          } catch (error) {
-            console.error("Error eliminando la receta:", error);
-            alert("Ocurrió un error al eliminar la receta.");
-          }
         }
-      };
+    };
+
+      
       
     return (
         <div className="bg-white rounded-md overflow-hidden relative shadow-md">
@@ -118,11 +130,12 @@ const Cards = (props) => {
             {/* Edit Modal Component */}
             {isEditModalOpen && (
                 <EditModal
-                    title={editedData.title}
-                    ingredients={editedData.ingredients}
-                    servings={editedData.servings}
-                    difficulty={editedData.difficulty}
-                    description={editedData.description}
+                    id={props.id}
+                    nombre={editedData.nombre}
+                    ingredientes={editedData.ingredientes}
+                    porciones={editedData.porciones}
+                    fk_dificultad={editedData.fk_dificultad}
+                    receta={editedData.receta}
                     onChange={handleEditChange}
                     onSave={saveEdit}
                     onClose={closeEditModal}

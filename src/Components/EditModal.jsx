@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from "react";
 import { GET } from "../Services/Fetch";
 
-const EditModal = ({ title, ingredients, servings, difficulty, description, onChange, onSave, onClose }) => {
+const EditModal = ({ nombre, ingredientes, porciones, fk_dificultad, receta, onChange, onSave, onClose }) => {
   const [dificultades, setDificultades] = useState([]);
   useEffect(() => {
     const fetchDificultades = async () => {
@@ -26,8 +26,8 @@ const EditModal = ({ title, ingredients, servings, difficulty, description, onCh
           <label className="block text-gray-700 mb-2">Título</label>
           <input
             type="text"
-            name="title"
-            value={title}
+            name="nombre"
+            value={nombre}
             onChange={onChange}
             className="w-full px-3 py-2 border rounded-lg"
             required
@@ -38,8 +38,8 @@ const EditModal = ({ title, ingredients, servings, difficulty, description, onCh
         <div className="mb-4">
           <label className="block text-gray-700 mb-2">Descripción</label>
           <textarea
-            name="description"
-            value={description}
+            name="receta"
+            value={receta}
             onChange={onChange}
             className="w-full px-3 py-2 border rounded-lg"
             required
@@ -52,8 +52,8 @@ const EditModal = ({ title, ingredients, servings, difficulty, description, onCh
           <label className="block text-gray-700 mb-2">Ingredientes</label>
           <textarea
             type="number"
-            name="ingredients"
-            value={ingredients}
+            name="ingredientes"
+            value={ingredientes}
             onChange={onChange}
             className="w-full px-3 py-2 border rounded-lg"
             required
@@ -65,8 +65,8 @@ const EditModal = ({ title, ingredients, servings, difficulty, description, onCh
           <label className="block text-gray-700 mb-2">Porciones</label>
           <input
             type="number"
-            name="servings"
-            value={servings}
+            name="porciones"
+            value={porciones}
             onChange={onChange}
             className="w-full px-3 py-2 border rounded-lg"
             required
@@ -76,8 +76,8 @@ const EditModal = ({ title, ingredients, servings, difficulty, description, onCh
         <div className="mb-4">
           <label className="block text-gray-700 mb-2">Dificultad</label>
           <select
-            name="difficulty"
-            value={difficulty}
+            name="fk_dificultad"
+            value={fk_dificultad}
             onChange={onChange}
             className="w-full px-3 py-2 border rounded-lg"
           >
