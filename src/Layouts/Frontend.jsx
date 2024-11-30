@@ -25,10 +25,6 @@ const Frontend = (props) => {
                     text: 'Nosotros'
                 },
                 {
-                    to: '/contacto',
-                    text: 'Contacto'
-                },
-                {
                     to: '/recetas',
                     text: 'Recetas'
                 },

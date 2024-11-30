@@ -14,7 +14,7 @@ const Cards = (props) => {
         receta: props.description,
         ingredientes: props.ingredients,
         porciones: props.servings,
-        fk_dificultad: props.fk_dificultad
+        fk_dificultad: props.fk_dificultad ?? 1
     });
     const openModal = () => {
         setIsModalOpen(true);
@@ -54,6 +54,7 @@ const Cards = (props) => {
         if (response.success) {
             alert("Receta editada exitosamente!");
             closeEditModal();
+            window.location.reload();
         }
         else {
             alert(`Hubo un problema al editar la receta: ${response.message || 'Error desconocido'}`);

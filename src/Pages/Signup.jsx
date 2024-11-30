@@ -16,7 +16,8 @@ const Signup = () => {
         }   
         try {
             const response = await POST(url, formData);
-        if (response?.succes) { 
+            console.log(response);
+        if (response.success) { 
             window.alert("Usuario creado correctamente. Inicie sesion para continuar.");
             window.location.replace("/login");
         } else {
