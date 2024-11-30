@@ -40,18 +40,17 @@ const Cards = (props) => {
 
     const saveEdit = async () => {
         const url = `Recetas/Patch/`;
-        console.log(editedData)
         if (!editedData.nombre || !editedData.receta || !editedData.ingredientes || !editedData.porciones) {
             window.alert("Complete los campos para continuar.");
             return;
-          }
+        }
         const response = await PATCH(url, editedData);
         if (response.success) {
             alert("Receta editada exitosamente!");
             closeEditModal();
             // props.onEdit(editedData);
             window.location.reload();
-            
+
         }
         else {
             alert(`Hubo un problema al editar la receta: ${response.message || 'Error desconocido'}`);
@@ -66,17 +65,16 @@ const Cards = (props) => {
         const confirmDelete = window.confirm("¿Estás seguro de que quieres eliminar esta receta?");
         if (confirmDelete) {
             try {
-                const response = await DELETE(url, { id: props.id }); // Enviar 'id' como parámetro de consulta
+                const response = await DELETE(url, { id: props.id });
                 if (response.success) {
                     alert("Receta eliminada exitosamente!");
                     props.onDelete(props.id);
                 } else {
                     alert("Hubo un problema al eliminar la receta.");
-
                 }
             } catch (error) {
-                /*console.error("Error eliminando la receta:", error);
-                alert("Ocurrió un error al eliminar la receta.");*/
+                console.error("Error eliminando la receta:", error);
+                alert("Ocurrió un error al eliminar la receta.");
             }
         }
     };

@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Buttons from "../Components/Buttons";
 import { POST } from "../Services/Fetch";
-import { data } from "autoprefixer";
 import { GET } from "../Services/Fetch";
 const url = "Recetas/post"
 
@@ -32,7 +31,6 @@ const Agregar = () => {
       return;
     }
     const response = await POST(url, formData);
-    console.log(response);
     if (response.success) {
       alert("Receta agregada exitosamente!");
       limpiarCampos();
@@ -47,7 +45,6 @@ const Agregar = () => {
       try {
 
         const data = await GET("Dificultades/Get");
-        console.log(data.data);
         setDificultades(data.data);
       } catch (error) {
         console.error("Error en la petición:", error);

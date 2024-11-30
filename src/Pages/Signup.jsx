@@ -16,7 +16,6 @@ const Signup = () => {
         }   
         try {
             const response = await POST(url, formData);
-            console.log(response);
         if (response.success) { 
             window.alert("Usuario creado correctamente. Inicie sesion para continuar.");
             window.location.replace("/login");
@@ -47,7 +46,6 @@ const Signup = () => {
                         <div className="mt-2">
                             <TextInput
                                 type={'text'}
-                                //placeholder={'Username'}
                                 callback={(e) => { setFormData({ ...formData, Usuario: e.target.value }) }}
                                 id={'username'}
                             />
@@ -63,7 +61,6 @@ const Signup = () => {
                         <div className="mt-2">
                             <TextInput
                                 type={'password'}
-                                //placeholder={'Password'}
                                 callback={(e) => { setFormData({ ...formData, Password: e.target.value }) }}
                                 id={'password'}
                             />

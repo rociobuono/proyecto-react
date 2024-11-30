@@ -6,52 +6,45 @@ import { POST } from "../Services/Fetch.js";
 
 
 const url = "login"
-const Login =  () => {
+const Login = () => {
     const [formData, setFormData] = useState({ Usuario: '', Password: '' });
     const login = async (event) => {
         //event.preventDefault();
-        if (! formData.Usuario || ! formData.Password) {
+        if (!formData.Usuario || !formData.Password) {
             window.alert("Complete los campos para continuar.");
         }
         try {
             const response = await POST(url, formData); // Llama a la función POST con los datos del formulario
-            if(response?.accessToken) {
-                localStorage.setItem('token', response?.accessToken); 
-                
-            if(localStorage.getItem('token')){
-                window.location.replace("/inicio");
-
+            if (response?.accessToken) {
+                localStorage.setItem('token', response?.accessToken);
+                if (localStorage.getItem('token')) {
+                    window.location.replace("/inicio");
+                }
             }
-
-                
-            }
-
         } catch (error) {
             console.error("Error al iniciar sesión:", error);
             window.alert("Ocurrió un error. Inténtalo de nuevo.");
         }
-
     }
 
     return (
         <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
             <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-               
+
                 <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
                     Iniciar Sesión
                 </h2>
             </div>
 
             <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-                <div onSubmit={login}  className="space-y-6">
+                <div onSubmit={login} className="space-y-6">
                     <div>
                         <label htmlFor="Usuario" className="block text-sm font-medium leading-6 text-gray-900">
-                            Usuario 
+                            Usuario
                         </label>
                         <div className="mt-2">
                             <TextInput
                                 type={'text'}
-                                //placeholder={'Username'}
                                 callback={(e) => { setFormData({ ...formData, Usuario: e.target.value }) }}
                                 id={'Usuario'}
                             />
@@ -64,7 +57,7 @@ const Login =  () => {
                                 Contraseña
                             </label>
                             <div className="text-sm">
-                                <a  className="font-semibold text-stone-500 hover:text-indigo-500">
+                                <a className="font-semibold text-stone-500 hover:text-indigo-500">
                                     Olvido su contraseña?
                                 </a>
                             </div>
@@ -72,7 +65,6 @@ const Login =  () => {
                         <div className="mt-2">
                             <TextInput
                                 type={'password'}
-                                //placeholder={'Password'}
                                 callback={(e) => { setFormData({ ...formData, Password: e.target.value }) }}
                                 id={'password'}
                             />

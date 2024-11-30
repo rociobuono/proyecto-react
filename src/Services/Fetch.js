@@ -1,4 +1,3 @@
-//import { backendurl } from "../env.jsx";
 const backendurl = "http://localhost:8080/"
 
 export async function POST(url, data){
