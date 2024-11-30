@@ -7,10 +7,10 @@ import { POST } from "../Services/Fetch.js";
 
 const url = "login"
 const Login =  () => {
-    const [formData, setFormData] = useState({ Username: '', Password: '' });
+    const [formData, setFormData] = useState({ Usuario: '', Password: '' });
     const login = async (event) => {
         //event.preventDefault();
-        if (!formData.Username ) {
+        if (! formData.Usuario || ! formData.Password) {
             window.alert("Complete los campos para continuar.");
         }
         try {

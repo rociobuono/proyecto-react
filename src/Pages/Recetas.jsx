@@ -34,8 +34,12 @@ const Recetas = () => {
     };
 
     const handleDelete = (id) => {
-        setRecipes((prevRecipes) => prevRecipes.filter((recipe) => recipe.id !== id));
-      };
+        setRecetas((prevRecetas) => { //Este metodo filtra q solo se muestren las recetas que el id sea dif al q se acaba d eliminar
+            const recetasActualizadas = prevRecetas.filter((receta) => receta.receta_id !== id)
+            return recetasActualizadas;
+        });
+
+    };
     return (
         <>
             <div className="container px-6 pt-20 pb-5 mx-auto">
@@ -62,10 +66,10 @@ const Recetas = () => {
             )}
             */}
             <div className="grid gap-4 gap-y-8 md:grid-cols-2 lg:grid-cols-3 mb-16">
-                {recetas.length > 0 ? (
-                    recetas.map((receta,index) => (
+                {recetas && recetas.length > 0 ? (
+                    recetas.map((receta, index) => (
                         <div key={index}>
-                            <Cards  
+                            <Cards
                                 id={receta.receta_id}
                                 title={receta.nombre}
                                 ingredients={receta.ingredientes}

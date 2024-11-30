@@ -4,11 +4,12 @@ import { useState } from 'react'
 import EditModal from "./EditModal";
 import { PATCH } from "../Services/Fetch";
 import { DELETE } from "../Services/Fetch";
+
 const Cards = (props) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [isEditModalOpen, setIsEditModalOpen] = useState(false);
     const [editedData, setEditedData] = useState({
-        id:props.id,
+        id: props.id,
         nombre: props.title,
         receta: props.description,
         ingredientes: props.ingredients,
@@ -29,13 +30,13 @@ const Cards = (props) => {
     const closeEditModal = () => {
         setIsEditModalOpen(false);
         setEditedData({
-            id:props.id,
+            id: props.id,
             nombre: props.nombre,
             receta: props.receta,
             ingredientes: props.ingredientes,
             porciones: props.porciones,
             fk_dificultad: props.fk_dificultad
-            
+
         });
     };
     const handleEditChange = (e) => {
@@ -49,7 +50,7 @@ const Cards = (props) => {
     const saveEdit = async () => {
         const url = `Recetas/Patch/`;
         console.log(editedData)
-        const response = await PATCH(url,editedData);
+        const response = await PATCH(url, editedData);
         if (response.success) {
             alert("Receta editada exitosamente!");
             closeEditModal();
@@ -59,8 +60,8 @@ const Cards = (props) => {
         }
     };
 
-    
-    
+
+
 
     const deleteRecipe = async () => {
         const url = `Recetas/Delete/`;
@@ -68,11 +69,12 @@ const Cards = (props) => {
         if (confirmDelete) {
             try {
                 const response = await DELETE(url, { id: props.id }); // Enviar 'id' como parámetro de consulta
-                if (!response.ok) {
+                if (response.success) {
                     alert("Receta eliminada exitosamente!");
-                    props.onDelete(props.id); 
+                    props.onDelete(props.id);
                 } else {
                     alert("Hubo un problema al eliminar la receta.");
+
                 }
             } catch (error) {
                 /*console.error("Error eliminando la receta:", error);
@@ -81,8 +83,8 @@ const Cards = (props) => {
         }
     };
 
-      
-      
+
+
     return (
         <div className="bg-white rounded-md overflow-hidden relative shadow-md">
             {/*
@@ -113,7 +115,7 @@ const Cards = (props) => {
                 >Instrucciones</button>
                 <div className="flex space-x-2 mt-4">
                     <button className="text-white bg-gray-600 hover:bg-gray-700 p-2 rounded-md w-full uppercase" onClick={openEditModal} > Editar </button>
-                    <button className="text-white bg-gray-600 hover:bg-gray-700 p-2 rounded-md w-full uppercase"  onClick={deleteRecipe} > Eliminar </button>
+                    <button className="text-white bg-gray-600 hover:bg-gray-700 p-2 rounded-md w-full uppercase" onClick={deleteRecipe} > Eliminar </button>
                 </div>
             </div>
             <div className="absolute top-0 right-0 mt-4 mr-4 bg-stone-500 text-white rounded-full pt-1 pb-1 pl-4 pr-5 text-xs uppercase">

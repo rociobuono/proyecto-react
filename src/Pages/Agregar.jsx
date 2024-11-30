@@ -32,7 +32,8 @@ const Agregar = () => {
       return;
     }
     const response = await POST(url, formData);
-    if (!response.ok) {
+    console.log(response);
+    if (response.success) {
       alert("Receta agregada exitosamente!");
       limpiarCampos();
 

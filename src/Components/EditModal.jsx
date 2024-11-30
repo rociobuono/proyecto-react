@@ -9,7 +9,6 @@ const EditModal = ({ nombre, ingredientes, porciones, fk_dificultad, receta, onC
       try {
 
         const data = await GET("Dificultades/Get");
-        console.log(data.data);
         setDificultades(data.data);
       } catch (error) {
         console.error("Error en la petición:", error);
