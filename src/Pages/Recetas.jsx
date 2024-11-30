@@ -9,8 +9,8 @@ const Recetas = () => {
 
     const [recetas, setRecetas] = useState([]);
     const [dificultades, setDificultades] = useState([]);
-
     const [hasSearched, setHasSearched] = useState(false);
+
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -40,6 +40,19 @@ const Recetas = () => {
         });
 
     };
+
+    // const handleEdit = (editedRecipe) => {
+    //     setRecetas((prevRecetas) => { 
+    //         const recipeIndex = recetas.findIndex(receta => receta.receta_id === editedRecipe.id);
+    //         if(recipeIndex === -1){
+    //             return recetas;
+    //         }
+    //         const recetasActualizadas = prevRecetas;
+    //         recetasActualizadas[recipeIndex] = {...recetasActualizadas[recipeIndex], ...editedRecipe };
+    //         return recetasActualizadas;
+    //     });
+    // };
+
     return (
         <>
             <div className="container px-6 pt-20 pb-5 mx-auto">
@@ -75,8 +88,10 @@ const Recetas = () => {
                                 ingredients={receta.ingredientes}
                                 servings={receta.porciones}
                                 difficulty={getDificultad(receta.fk_dificultad)}
+                                fk_dificultad={receta.fk_dificultad}
                                 description={receta.receta}
                                 onDelete={handleDelete}
+                                // onEdit ={handleEdit}
                             />
                         </div>
                     ))

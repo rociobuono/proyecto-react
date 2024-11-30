@@ -54,7 +54,7 @@ const Frontend = (props) => {
                 {/* Centered logo and buttons */}
                 <div className="flex items-center justify-center flex-grow space-x-8">
                     {/* Logo */}
-                    <a href="#" className="p-1.5">
+                    <a href="/inicio" className="p-1.5">
                         <span className="sr-only">Your Company</span>
                         <img className="h-8 w-auto" src="public\chef-hat.png" alt="Logo" />
                     </a>
@@ -67,7 +67,7 @@ const Frontend = (props) => {
                             ))
                         ) : (
                             <span className="text-white">
-                                Welcome! Please log in to access more features.
+                                Bienvenido! Inicia sesion para acceder a todas las funciones.
                             </span>
 
                         )}
@@ -77,7 +77,7 @@ const Frontend = (props) => {
                 {/* LogOut button aligned to the right */}
                 {isLoggedIn && (
                     <div className="flex-shrink-0"> {/* Added flex-1 to ensure proper spacing */}
-                        <Buttons txt={'LogOut'} callback={logOut} />
+                        <Buttons txt={'Salir'} callback={logOut} />
                     </div>
                 )}
             </header>

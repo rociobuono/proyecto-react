@@ -139,6 +139,8 @@ const Agregar = () => {
             onChange={handleChange}
             className="w-full px-3 py-2 border rounded-lg"
             placeholder="Ej: 4"
+            min= "1"
+            max="100"
             required
           />
         </div>

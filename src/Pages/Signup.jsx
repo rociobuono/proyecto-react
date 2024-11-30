@@ -34,7 +34,7 @@ const Signup = () => {
             <div className="sm:mx-auto sm:w-full sm:max-w-sm">
                
                 <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
-                    Create an Account!
+                    Crear Cuenta
                 </h2>
             </div>
 
@@ -42,7 +42,7 @@ const Signup = () => {
                 <form onSubmit={signup}  className="space-y-6">
                     <div>
                         <label htmlFor="username" className="block text-sm font-medium leading-6 text-gray-900">
-                            Username 
+                            Usuario 
                         </label>
                         <div className="mt-2">
                             <TextInput
@@ -57,7 +57,7 @@ const Signup = () => {
                     <div>
                         <div className="flex items-center justify-between">
                             <label htmlFor="password" className="block text-sm font-medium leading-6 text-gray-900">
-                                Password
+                                Contraseña
                             </label>
                         </div>
                         <div className="mt-2">

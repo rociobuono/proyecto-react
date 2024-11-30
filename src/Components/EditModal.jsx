@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import { GET } from "../Services/Fetch";
 
 const EditModal = ({ nombre, ingredientes, porciones, fk_dificultad, receta, onChange, onSave, onClose }) => {
+ 
   const [dificultades, setDificultades] = useState([]);
   useEffect(() => {
     const fetchDificultades = async () => {
@@ -68,6 +69,8 @@ const EditModal = ({ nombre, ingredientes, porciones, fk_dificultad, receta, onC
             value={porciones}
             onChange={onChange}
             className="w-full px-3 py-2 border rounded-lg"
+            min="1"
+            max="100"
             required
           />
         </div>

@@ -38,7 +38,7 @@ const Login =  () => {
             <div className="sm:mx-auto sm:w-full sm:max-w-sm">
                
                 <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
-                    Sign in to your account
+                    Iniciar Sesión
                 </h2>
             </div>
 
@@ -46,7 +46,7 @@ const Login =  () => {
                 <div onSubmit={login}  className="space-y-6">
                     <div>
                         <label htmlFor="Usuario" className="block text-sm font-medium leading-6 text-gray-900">
-                            Username 
+                            Usuario 
                         </label>
                         <div className="mt-2">
                             <TextInput
@@ -61,11 +61,11 @@ const Login =  () => {
                     <div>
                         <div className="flex items-center justify-between">
                             <label htmlFor="password" className="block text-sm font-medium leading-6 text-gray-900">
-                                Password
+                                Contraseña
                             </label>
                             <div className="text-sm">
                                 <a  className="font-semibold text-stone-500 hover:text-indigo-500">
-                                    Forgot password?
+                                    Olvido su contraseña?
                                 </a>
                             </div>
                         </div>
@@ -90,9 +90,9 @@ const Login =  () => {
                 </div>
 
                 <p className="mt-10 text-center text-sm text-gray-500">
-                    Not a member?{' '}
+                    No es un Usuario?{' '}
                     <a href="/signup" className="font-semibold leading-6 text-stone-500 hover:text-indigo-500">
-                        Sign Up!
+                        Crear cuenta!
                     </a>
                 </p>
             </div>

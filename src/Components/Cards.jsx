@@ -29,15 +29,6 @@ const Cards = (props) => {
     };
     const closeEditModal = () => {
         setIsEditModalOpen(false);
-        setEditedData({
-            id: props.id,
-            nombre: props.nombre,
-            receta: props.receta,
-            ingredientes: props.ingredientes,
-            porciones: props.porciones,
-            fk_dificultad: props.fk_dificultad
-
-        });
     };
     const handleEditChange = (e) => {
         const { name, value } = e.target;
@@ -50,11 +41,17 @@ const Cards = (props) => {
     const saveEdit = async () => {
         const url = `Recetas/Patch/`;
         console.log(editedData)
+        if (!editedData.nombre || !editedData.receta || !editedData.ingredientes || !editedData.porciones) {
+            window.alert("Complete los campos para continuar.");
+            return;
+          }
         const response = await PATCH(url, editedData);
         if (response.success) {
             alert("Receta editada exitosamente!");
             closeEditModal();
+            // props.onEdit(editedData);
             window.location.reload();
+            
         }
         else {
             alert(`Hubo un problema al editar la receta: ${response.message || 'Error desconocido'}`);
