@@ -56,8 +56,8 @@ const Recetas = () => {
 
             <div className="grid gap-4 gap-y-8 md:grid-cols-2 lg:grid-cols-3 mb-16">
                 {recetas && recetas.length > 0 ? (
-                    recetas.map((receta, index) => (
-                        <div key={index}>
+                    recetas.map((receta, receta_id) => (
+                        <div key={receta_id}>
                             <Cards
                                 id={receta.receta_id}
                                 title={receta.nombre}
